@@ -1,10 +1,14 @@
 class VendorMachine
-  attr_accessor :sum
+  attr_accessor :inserted
   def initialize
-    @sum = 0
+    @inserted = 0
   end
 
   def insert(money)
-    @sum += money
+    @inserted += money
+  end
+
+  def total
+    @inserted
   end
 end
