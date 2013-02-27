@@ -29,11 +29,22 @@ describe VendorMachine do
   end
 
   describe '払い戻しができること' do
-    before do
-      subject.insert(100)
+    context "100円入っている時" do
+      before do
+        subject.insert(100)
+      end
+      it '100円払い戻されること' do
+        subject.refund.should == 100
+      end
     end
-    it '100円入れたら、100円払い戻されること' do
-      subject.refund.should == 100
+
+    context "1000円入っている時" do
+      before do
+        subject.insert(1000)
+      end
+      it '1000円払い戻されること' do
+        subject.refund.should == 1000
+      end
     end
   end
 end
