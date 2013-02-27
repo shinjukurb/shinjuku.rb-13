@@ -27,4 +27,13 @@ describe VendorMachine do
       subject.total.should == 100
     end
   end
+
+  describe '払い戻しができること' do
+    before do
+      subject.insert(100)
+    end
+    it '100円入れたら、100円払い戻されること' do
+      subject.refund.should == 100
+    end
+  end
 end

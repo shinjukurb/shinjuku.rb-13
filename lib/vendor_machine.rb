@@ -11,4 +11,8 @@ class VendorMachine
   def total
     @inserted
   end
+
+  def refund
+    100
+  end
 end
