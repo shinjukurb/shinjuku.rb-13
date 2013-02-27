@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require_relative '../lib/vendor_machine'
 describe VendorMachine do
   describe '投入できること' do
@@ -44,6 +45,16 @@ describe VendorMachine do
       end
       it '1000円払い戻されること' do
         subject.refund.should == 1000
+      end
+    end
+
+    context '払い戻した後' do
+      before do
+        subject.insert(1000)
+        subject.refund
+      end
+      it '合計金額が0円になる' do
+        subject.total.should == 0
       end
     end
   end

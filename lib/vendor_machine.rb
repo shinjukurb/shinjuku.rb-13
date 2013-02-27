@@ -13,6 +13,8 @@ class VendorMachine
   end
 
   def refund
-    100
+    refund_total =  @inserted
+    @inserted = 0
+    refund_total
   end
 end
