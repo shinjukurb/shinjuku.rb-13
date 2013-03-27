@@ -18,6 +18,15 @@ describe VendorMachine do
         end
       end
     end
+    context '想定外のお金が投入された時' do
+      before do
+        subject.insert(1)
+      end
+      it '合計が0円になる' do
+        subject.total.should == 0
+      end
+    end
+
   end
 
   describe '合計値を取得できること' do
