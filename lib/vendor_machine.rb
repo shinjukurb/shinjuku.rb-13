@@ -5,7 +5,12 @@ class VendorMachine
   end
 
   def insert(money)
-    @inserted += money
+    if money == 10 or money == 50 or 
+      money == 100 or 
+      money == 500 or  
+      money == 1000
+      @inserted += money
+    end
   end
 
   def total
