@@ -5,11 +5,11 @@ class VendorMachine
   end
 
   def insert(money)
-    if money == 10 or money == 50 or 
-      money == 100 or 
-      money == 500 or  
-      money == 1000
+    money_list = [10, 50, 100, 500, 1000]
+    if money_list.include?(money)
       @inserted += money
+    else
+      money
     end
   end
 

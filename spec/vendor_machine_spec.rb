@@ -19,9 +19,14 @@ describe VendorMachine do
       end
     end
     context '想定外のお金が投入された時' do
+      it '投入したお金が返却されること' do
+        subject.insert(1).should == 1
+      end
+
       before do
         subject.insert(1)
       end
+      
       it '合計が0円になる' do
         subject.total.should == 0
       end
