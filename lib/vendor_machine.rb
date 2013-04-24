@@ -8,11 +8,8 @@ class VendorMachine
   end
 
   def insert(money)
-    if MONEY_LIST.include?(money)
-      @inserted += money
-    else
-      money
-    end
+    return money unless MONEY_LIST.include? money
+    @inserted += money
   end
 
   def total
