@@ -1,43 +1,48 @@
 # -*- coding: utf-8 -*-
 require_relative '../lib/vendor_machine'
+
 describe VendorMachine do
-  describe '投入できること' do
+  describe '#insert' do
     context '100円入れた時' do
       before do
         subject.insert(100)
       end
+
       it '合計が100円になる' do
         subject.total.should == 100
       end
+
       context 'さらに1,000円入れた時' do
         before do
           subject.insert(1000)
         end
+
         it '合計が1100円になる' do
           subject.total.should == 1100
         end
       end
     end
+
     context '想定外のお金が投入された時' do
+      before do
+        subject.insert(1)
+      end
+
       it '投入したお金が返却されること' do
         subject.insert(1).should == 1
       end
 
-      before do
-        subject.insert(1)
-      end
-      
       it '合計が0円になる' do
         subject.total.should == 0
       end
     end
-
   end
 
   describe '合計値を取得できること' do
     before do
       subject.insert(100)
     end
+
     it '合計が100円になる' do
       subject.total.should == 100
     end
@@ -48,6 +53,7 @@ describe VendorMachine do
       before do
         subject.insert(100)
       end
+
       it '100円払い戻されること' do
         subject.refund.should == 100
       end
@@ -57,6 +63,7 @@ describe VendorMachine do
       before do
         subject.insert(1000)
       end
+
       it '1000円払い戻されること' do
         subject.refund.should == 1000
       end
@@ -67,6 +74,7 @@ describe VendorMachine do
         subject.insert(1000)
         subject.refund
       end
+
       it '合計金額が0円になる' do
         subject.total.should == 0
       end
