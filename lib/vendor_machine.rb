@@ -1,5 +1,5 @@
 class VendorMachine
-  attr_accessor :inserted
+  attr_reader :inserted
 
   MONEY_LIST = [10, 50, 100, 500, 1000]
 
