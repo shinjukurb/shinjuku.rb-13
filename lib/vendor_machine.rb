@@ -1,25 +1,21 @@
 class VendorMachine
-  attr_reader :inserted
+  attr_reader :total
 
   MONEY_LIST = [10, 50, 100, 500, 1000]
 
   def initialize
-    @inserted = 0
+    @total = 0
   end
 
   def insert(money)
     return money unless MONEY_LIST.include? money
-    @inserted += money
+    @total += money
     nil
   end
 
-  def total
-    @inserted
-  end
-
   def refund
-    refund_total =  @inserted
-    @inserted = 0
+    refund_total =  @total
+    @total = 0
     refund_total
   end
 end
