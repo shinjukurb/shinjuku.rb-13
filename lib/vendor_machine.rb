@@ -1,11 +1,16 @@
 class VendorMachine
   attr_accessor :inserted
+
+  MONEY_LIST = [10, 50, 100, 500, 1000]
+
   def initialize
     @inserted = 0
   end
 
   def insert(money)
+    return money unless MONEY_LIST.include? money
     @inserted += money
+    nil
   end
 
   def total
