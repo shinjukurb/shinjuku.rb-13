@@ -8,3 +8,11 @@ shinjuku.rb #14 2013/02/27
 * 払い戻しって金額表示するだけでいいの？
 
 http://togetter.com/li/463384
+
+次回TODO
+2013-04-24
+- DONE: Step1
+- branch: refactoring
+- テストのリファクタリングがしたい
+-- subject周り
+-- 重複したテストをどうにか
