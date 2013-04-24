@@ -12,6 +12,10 @@ describe VendorMachine do
         subject.total.should == 100
       end
 
+      it '投入に成功するとnilが返る' do
+        subject.insert(100).should == nil
+      end
+
       context 'さらに1,000円入れた時' do
         before do
           subject.insert(1000)

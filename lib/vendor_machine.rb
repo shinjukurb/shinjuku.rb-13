@@ -10,6 +10,7 @@ class VendorMachine
   def insert(money)
     return money unless MONEY_LIST.include? money
     @inserted += money
+    nil
   end
 
   def total
