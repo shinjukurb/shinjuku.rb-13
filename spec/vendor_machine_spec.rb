@@ -28,16 +28,74 @@ describe VendorMachine do
     end
 
     context '想定外のお金が投入された時' do
-      before do
-        subject.insert(1)
+      context '1円玉が投入された時' do
+        before do
+          subject.insert(1)
+        end
+
+        it '投入したお金が返却されること' do
+          subject.insert(1).should == 1
+        end
+
+        it '合計が0円になる' do
+          subject.total.should == 0
+        end
       end
 
-      it '投入したお金が返却されること' do
-        subject.insert(1).should == 1
+      context '5円玉が投入された時' do
+        before do
+          subject.insert(5)
+        end
+
+        it '投入したお金が返却されること' do
+          subject.insert(5).should == 5
+        end
+
+        it '合計が0円になる' do
+          subject.total.should == 0
+        end
       end
 
-      it '合計が0円になる' do
-        subject.total.should == 0
+      context '2,000円札が投入された時' do
+        before do
+          subject.insert(2000)
+        end
+
+        it '投入したお金が返却されること' do
+          subject.insert(2000).should == 2000
+        end
+
+        it '合計が0円になる' do
+          subject.total.should == 0
+        end
+      end
+
+      context '5,000円札が投入された時' do
+        before do
+          subject.insert(5000)
+        end
+
+        it '投入したお金が返却されること' do
+          subject.insert(5000).should == 5000
+        end
+
+        it '合計が0円になる' do
+          subject.total.should == 0
+        end
+      end
+
+      context '10,000円札が投入された時' do
+        before do
+          subject.insert(10000)
+        end
+
+        it '投入したお金が返却されること' do
+          subject.insert(10000).should == 10000
+        end
+
+        it '合計が0円になる' do
+          subject.total.should == 0
+        end
       end
     end
   end
