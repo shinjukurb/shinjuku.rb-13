@@ -142,4 +142,8 @@ describe VendorMachine do
       end
     end
   end
+
+  describe 'ジュースの情報（値段と名前と在庫）を取得できること' do
+    it { subject.show_drinks.should == {name: 'コーラ', price: 120, stock: 5} }
+  end
 end
