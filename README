@@ -10,9 +10,11 @@ shinjuku.rb #14 2013/02/27
 http://togetter.com/li/463384
 
 次回TODO
-2013-04-24
-- DONE: Step1
-- branch: refactoring
+2013-05-22
+- DONE: Step2
+- branch: step3
+- コーラが購入できるかどうかを調べる際に、在庫についてのテストケースをもっと増やしたい
+-- DRINK が定数なのを何とかしたい
 - テストのリファクタリングがしたい
 -- subject周り
 -- 重複したテストをどうにか
