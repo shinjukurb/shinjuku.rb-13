@@ -2,6 +2,11 @@ class VendorMachine
   attr_reader :total
 
   MONEY_LIST = [10, 50, 100, 500, 1000]
+  DRINKS = {
+    name: 'コーラ',
+    price: 120,
+    stock: 5
+  }
 
   def initialize
     @total = 0
@@ -17,5 +22,9 @@ class VendorMachine
     refund_total =  @total
     @total = 0
     refund_total
+  end
+
+  def show_drinks
+    DRINKS
   end
 end
