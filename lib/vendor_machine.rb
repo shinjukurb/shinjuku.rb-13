@@ -27,4 +27,8 @@ class VendorMachine
   def show_drinks
     DRINKS
   end
+
+  def available?(drink)
+    @total >= DRINKS[:price] && DRINKS[:stock].nonzero?
+  end
 end

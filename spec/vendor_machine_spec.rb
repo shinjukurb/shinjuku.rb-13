@@ -146,4 +146,45 @@ describe VendorMachine do
   describe 'ジュースの情報（値段と名前と在庫）を取得できること' do
     it { subject.show_drinks.should == {name: 'コーラ', price: 120, stock: 5} }
   end
+
+  describe 'コーラが購入できるかどうかを取得できること' do
+    context '投入金額が不足している場合' do
+      before do
+        subject.insert(100)
+      end
+
+      it { should_not be_available('コーラ') }
+    end
+
+    context "投入金額が足りている場合" do
+      before do
+        subject.insert(100)
+        subject.insert(10)
+        subject.insert(10)
+      end
+
+      it { should be_available('コーラ')}
+    end
+
+    context '投入金額が過剰である場合' do
+      before do
+        subject.insert(100)
+        subject.insert(100)
+      end
+
+      it { should be_available('コーラ') }
+    end
+
+    context '在庫が不足している場合' do
+      before do
+        VendorMachine::DRINKS[:stock] = 0
+
+        subject.insert(100)
+        subject.insert(10)
+        subject.insert(10)
+      end
+
+      it { should_not be_available('コーラ') }
+    end
+  end
 end
