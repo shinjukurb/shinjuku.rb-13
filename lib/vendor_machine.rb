@@ -33,7 +33,8 @@ class VendorMachine
     buf.chomp
   end
 
-  def available?(drink)
-    @total >= DRINKS[:price] && DRINKS[:stock].nonzero?
+  def available?(drink_name)
+    drink = DRINKS.find {|d| d.name == drink_name}
+    drink && @total >= drink.price
   end
 end

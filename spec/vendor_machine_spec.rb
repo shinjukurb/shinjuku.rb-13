@@ -177,7 +177,7 @@ describe VendorMachine do
 
     context '在庫が不足している場合' do
       before do
-        VendorMachine::DRINKS[:stock] = 0
+        VendorMachine::DRINKS = []
 
         subject.insert(100)
         subject.insert(10)
