@@ -1,12 +1,13 @@
+require_relative "drink"
+
 class VendorMachine
   attr_reader :total
 
   MONEY_LIST = [10, 50, 100, 500, 1000]
-  DRINKS = {
-    name: 'コーラ',
-    price: 120,
-    stock: 5
-  }
+  DRINKS = [
+    Drink.new('コーラ', 120),
+    Drink.new('ドクペ', 120),
+  ]
 
   def initialize
     @total = 0
@@ -25,7 +26,11 @@ class VendorMachine
   end
 
   def show_drinks
-    DRINKS
+    buf = ""
+    DRINKS.group_by {|drink| drink}.each do |key, val|
+      buf += "#{key.name} #{key.price}円 #{val.length}個\n"
+    end
+    buf.chomp
   end
 
   def available?(drink)
