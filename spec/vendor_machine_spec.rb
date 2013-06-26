@@ -144,7 +144,7 @@ describe VendorMachine do
   end
 
   describe 'ジュースの情報（値段と名前と在庫）を取得できること' do
-    it { subject.show_drinks.should == "コーラ 120円 1個\nドクペ 120円 1個" }
+    it { subject.show_drinks.should == "コーラ 120円 5個\nドクペ 120円 1個" }
   end
 
   describe 'コーラが購入できるかどうかを取得できること' do
