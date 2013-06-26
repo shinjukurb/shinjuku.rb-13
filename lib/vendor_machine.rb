@@ -1,20 +1,21 @@
 require_relative "drink"
 
 class VendorMachine
-  attr_reader :total
+  attr_reader :total, :drinks
 
   MONEY_LIST = [10, 50, 100, 500, 1000]
-  DRINKS = [
-    Drink.new('コーラ', 120),
-    Drink.new('コーラ', 120),
-    Drink.new('コーラ', 120),
-    Drink.new('コーラ', 120),
-    Drink.new('コーラ', 120),
-    Drink.new('ドクペ', 120),
-  ]
 
   def initialize
     @total = 0
+
+    @drinks = [
+      Drink.new('コーラ', 120),
+      Drink.new('コーラ', 120),
+      Drink.new('コーラ', 120),
+      Drink.new('コーラ', 120),
+      Drink.new('コーラ', 120),
+      Drink.new('ドクペ', 120),
+    ]
   end
 
   def insert(money)
@@ -31,14 +32,25 @@ class VendorMachine
 
   def show_drinks
     buf = ""
-    DRINKS.group_by {|drink| drink.name}.each do |key, val|
+    @drinks.group_by {|drink| drink.name}.each do |key, val|
       buf += "#{key} #{val.first.price}円 #{val.length}個\n"
     end
     buf.chomp
   end
 
   def available?(drink_name)
-    drink = DRINKS.find {|d| d.name == drink_name}
+    drink = @drinks.find {|d| d.name == drink_name}
     drink && @total >= drink.price
   end
+
+  def stock_of(name)
+    @drinks.select{|d| d.name == name }.length
+  end
+
+  def sell(drink_name)
+    if available? drink_name
+      @drinks.delete_at @drinks.find_index{|d| d.name == drink_name}
+    end
+  end
+
 end

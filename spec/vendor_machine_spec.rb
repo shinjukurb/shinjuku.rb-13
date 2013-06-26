@@ -177,14 +177,32 @@ describe VendorMachine do
 
     context '在庫が不足している場合' do
       before do
-        VendorMachine::DRINKS = []
+        subject.drinks.clear
 
-        subject.insert(100)
         subject.insert(10)
+        subject.insert(100)
         subject.insert(10)
       end
 
       it { should_not be_available('コーラ') }
     end
   end
+
+  describe '#sell' do
+    context '投入金額が十分にある時' do
+      before do
+        subject.insert(10)
+        subject.insert(100)
+        subject.insert(10)
+      end
+      it {
+        expect{subject.sell('コーラ')}.to change{subject.stock_of('コーラ')}.by(-1)
+      }
+    end
+  end
+
+  describe '#stock_of' do
+    it { subject.stock_of('コーラ').should == 5 }
+  end
+
 end
