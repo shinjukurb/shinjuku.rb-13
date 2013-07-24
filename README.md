@@ -30,3 +30,9 @@ http://togetter.com/li/463384
 - テストのリファクタリングがしたい
   - subject周り
   - 重複したテストをどうにか
+
+## 2013-07-24
+- Status: Step4が完了
+  - step5ブランチを作るところから
+- branch: step4
+- 終わらせたい
