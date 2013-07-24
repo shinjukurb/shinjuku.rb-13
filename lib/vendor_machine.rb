@@ -1,12 +1,13 @@
 require_relative "drink"
 
 class VendorMachine
-  attr_reader :total, :drinks
+  attr_reader :total, :drinks, :sales
 
   MONEY_LIST = [10, 50, 100, 500, 1000]
 
   def initialize
     @total = 0
+    @sales = 0
 
     @drinks = [
       Drink.new('コーラ', 120),
@@ -49,8 +50,10 @@ class VendorMachine
 
   def sell(drink_name)
     if available? drink_name
-      @drinks.delete_at @drinks.find_index{|d| d.name == drink_name}
+      sold_drink = @drinks.delete_at @drinks.find_index{|d| d.name == drink_name}
+      @sales += sold_drink.price
     end
   end
+
 
 end

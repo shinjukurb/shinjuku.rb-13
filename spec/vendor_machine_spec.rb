@@ -205,4 +205,18 @@ describe VendorMachine do
     it { subject.stock_of('コーラ').should == 5 }
   end
 
+  describe "売上金額が取得できること" do
+    context "何も売りあげていない状態で" do
+      it { subject.sales.should == 0 }
+    end
+
+    context "コーラを売り上げた状態で" do
+      before do
+        subject.insert(500)
+        subject.sell('コーラ')
+      end
+
+      it { subject.sales.should == 120 }
+    end
+  end
 end
