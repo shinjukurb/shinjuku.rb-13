@@ -205,7 +205,7 @@ describe VendorMachine do
     it { subject.stock_of('コーラ').should == 5 }
   end
 
-  describe "売上金額が取得できること" do
+  describe "#sales" do
     context "何も売りあげていない状態で" do
       it { subject.sales.should == 0 }
     end
@@ -217,6 +217,13 @@ describe VendorMachine do
       end
 
       it { subject.sales.should == 120 }
+
+      describe "払い戻し操作" do
+        it "釣り銭が出力されること" do
+          subject.refund.should == 380
+        end
+      end
     end
+
   end
 end

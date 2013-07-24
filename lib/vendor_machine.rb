@@ -52,6 +52,7 @@ class VendorMachine
     if available? drink_name
       sold_drink = @drinks.delete_at @drinks.find_index{|d| d.name == drink_name}
       @sales += sold_drink.price
+      @total -= sold_drink.price
     end
   end
 
