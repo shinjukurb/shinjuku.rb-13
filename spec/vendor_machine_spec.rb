@@ -144,6 +144,86 @@ describe VendorMachine do
   end
 
   describe 'ジュースの情報（値段と名前と在庫）を取得できること' do
-    it { subject.show_drinks.should == {name: 'コーラ', price: 120, stock: 5} }
+    it { subject.show_drinks.should == "コーラ 120円 5個\nドクペ 120円 1個" }
+  end
+
+  describe 'コーラが購入できるかどうかを取得できること' do
+    context '投入金額が不足している場合' do
+      before do
+        subject.insert(100)
+      end
+
+      it { should_not be_available('コーラ') }
+    end
+
+    context "投入金額が足りている場合" do
+      before do
+        subject.insert(100)
+        subject.insert(10)
+        subject.insert(10)
+      end
+
+      it { should be_available('コーラ')}
+    end
+
+    context '投入金額が過剰である場合' do
+      before do
+        subject.insert(100)
+        subject.insert(100)
+      end
+
+      it { should be_available('コーラ') }
+    end
+
+    context '在庫が不足している場合' do
+      before do
+        subject.drinks.clear
+
+        subject.insert(10)
+        subject.insert(100)
+        subject.insert(10)
+      end
+
+      it { should_not be_available('コーラ') }
+    end
+  end
+
+  describe '#sell' do
+    context '投入金額が十分にある時' do
+      before do
+        subject.insert(10)
+        subject.insert(100)
+        subject.insert(10)
+      end
+      it {
+        expect{subject.sell('コーラ')}.to change{subject.stock_of('コーラ')}.by(-1)
+      }
+    end
+  end
+
+  describe '#stock_of' do
+    it { subject.stock_of('コーラ').should == 5 }
+  end
+
+  describe "#sales" do
+    context "何も売りあげていない状態で" do
+      it { subject.sales.should == 0 }
+    end
+
+    context "コーラを売り上げた状態で" do
+      before do
+        subject.insert(500)
+        subject.sell('コーラ')
+      end
+
+      it { subject.sales.should == 120 }
+
+      describe "払い戻し操作" do
+        it "釣り銭が出力されること" do
+          subject.refund.should == 380
+        end
+      end
+    end
+
   end
 end
