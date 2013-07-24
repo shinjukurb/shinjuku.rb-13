@@ -15,7 +15,6 @@ class VendorMachine
       Drink.new('コーラ', 120),
       Drink.new('コーラ', 120),
       Drink.new('コーラ', 120),
-      Drink.new('ドクペ', 120),
     ]
   end
 
@@ -39,6 +38,8 @@ class VendorMachine
     buf.chomp
   end
 
+
+
   def available?(drink_name)
     drink = @drinks.find {|d| d.name == drink_name}
     drink && @total >= drink.price
@@ -56,5 +57,15 @@ class VendorMachine
     end
   end
 
+  def stock(drink)
+    @drinks << drink
+  end
 
+  def list_drinks
+    @drinks.map(&:name).uniq
+  end
+
+  def available_drinks
+    list_drinks.select{|drink_name| available?(drink_name)}
+  end
 end

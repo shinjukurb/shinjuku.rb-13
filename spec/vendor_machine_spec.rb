@@ -144,7 +144,7 @@ describe VendorMachine do
   end
 
   describe 'ジュースの情報（値段と名前と在庫）を取得できること' do
-    it { subject.show_drinks.should == "コーラ 120円 5個\nドクペ 120円 1個" }
+    it { subject.show_drinks.should == "コーラ 120円 5個" }
   end
 
   describe 'コーラが購入できるかどうかを取得できること' do
@@ -225,5 +225,45 @@ describe VendorMachine do
       end
     end
 
+  end
+
+  describe '在庫を追加' do
+
+    context 'レッドブル５本と、水５本を追加した時' do
+      before do
+        subject.stock Drink.new('レッドブル', 200)
+        subject.stock Drink.new('レッドブル', 200)
+        subject.stock Drink.new('レッドブル', 200)
+        subject.stock Drink.new('レッドブル', 200)
+        subject.stock Drink.new('レッドブル', 200)
+
+        subject.stock Drink.new('水', 100)
+        subject.stock Drink.new('水', 100)
+        subject.stock Drink.new('水', 100)
+        subject.stock Drink.new('水', 100)
+        subject.stock Drink.new('水', 100)
+      end
+      it { subject.stock_of('レッドブル').should == 5 }
+      it { subject.stock_of('水').should == 5 }
+    end
+  end
+
+  describe "ドリンクリスト" do
+    it "取得できる" do
+      subject.list_drinks.sort.should == ["コーラ"].sort
+    end
+  end
+
+  describe "購入可能なドリンクリスト" do
+    context "初期状態かつお金を入れていないとき" do
+      it { subject.available_drinks.should be_empty }
+    end
+
+    context "十分な量のお金を投入した時" do
+      before do
+        subject.insert(500)
+      end
+      it { subject.available_drinks.should == ["コーラ"]}
+    end
   end
 end
